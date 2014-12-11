@@ -1,4 +1,4 @@
-package org.undertow.forge;
+package org.undertow.forge.jaxrs;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

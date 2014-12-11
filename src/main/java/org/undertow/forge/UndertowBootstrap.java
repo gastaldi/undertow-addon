@@ -18,6 +18,9 @@ public class UndertowBootstrap {
 	@Inject
 	private AddonRegistry addonRegistry;
 
+	@Inject
+	private JaxRsHttpHandler handler;
+
 	private Undertow undertow;
 
 	public void initializeUndertow(@Observes @Local PostStartup postStartup) {
@@ -26,6 +29,14 @@ public class UndertowBootstrap {
 		this.undertow = builder.build();
 		this.undertow.start();
 	}
+
+	// public void initializeApplications(@Observes PostStartup postStartup) {
+	// Imported<Application> services = addonRegistry
+	// .getServices(Application.class);
+	// for (Application application : services) {
+	// handler.deploy(application);
+	// }
+	// }
 
 	public void destroy(@Observes @Local PreShutdown preShutdown) {
 		if (undertow != null)

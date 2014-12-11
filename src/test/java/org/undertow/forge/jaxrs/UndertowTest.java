@@ -1,4 +1,4 @@
-package org.undertow.forge;
+package org.undertow.forge.jaxrs;
 
 import java.net.URL;
 
@@ -14,8 +14,10 @@ import org.jboss.forge.arquillian.archive.ForgeArchive;
 import org.jboss.forge.furnace.repositories.AddonDependencyEntry;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.undertow.forge.JaxRsHttpHandler;
 
 @RunWith(Arquillian.class)
 public class UndertowTest {
@@ -29,7 +31,7 @@ public class UndertowTest {
 		ForgeArchive archive = ShrinkWrap
 				.create(ForgeArchive.class)
 				.addBeansXML()
-				.addClass(HelloWorldHandler.class)
+				.addClasses(TestApplication.class, JAXRSEndpoint.class)
 				.addAsAddonDependencies(
 						AddonDependencyEntry
 								.create("org.jboss.forge.furnace.container:cdi"),
@@ -43,12 +45,20 @@ public class UndertowTest {
 	@Inject
 	private ResourceFactory resourceFactory;
 
+	@Inject
+	private JaxRsHttpHandler handler;
+
+	@Before
+	public void setUp() {
+		handler.deploy(TestApplication.class);
+	}
+
 	@Test
-	public void testUndertowInjection() throws Exception {
+	public void testJAXRS() throws Exception {
 		Resource<URL> resource = resourceFactory.create(new URL(
-				"http://localhost:8080"));
+				"http://localhost:8080/rest/testme"));
 		Assert.assertNotNull(resource);
 		Assert.assertTrue(resource.exists());
-		Assert.assertEquals("Hello World", resource.getContents());
+		Assert.assertEquals("Hello JAXRS World", resource.getContents());
 	}
 }

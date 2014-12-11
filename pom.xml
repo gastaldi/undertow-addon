@@ -69,6 +69,7 @@
 			<groupId>io.undertow</groupId>
 			<artifactId>undertow-servlet</artifactId>
 			<version>${version.undertow}</version>
+			<!-- 
 			<exclusions>
 				<exclusion>
 					<groupId>org.jboss.spec.javax.servlet</groupId>
@@ -79,6 +80,7 @@
 					<artifactId>jboss-annotations-api_1.2_spec</artifactId>
 				</exclusion>
 			</exclusions>
+			 -->
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
