@@ -29,6 +29,7 @@ public class UndertowTest {
 		ForgeArchive archive = ShrinkWrap
 				.create(ForgeArchive.class)
 				.addBeansXML()
+				.addClass(HelloWorldEnricher.class)
 				.addAsAddonDependencies(
 						AddonDependencyEntry
 								.create("org.jboss.forge.furnace.container:cdi"),
