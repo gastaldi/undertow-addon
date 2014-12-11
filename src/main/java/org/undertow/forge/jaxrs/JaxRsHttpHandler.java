@@ -1,4 +1,4 @@
-package org.undertow.forge;
+package org.undertow.forge.jaxrs;
 
 import static io.undertow.servlet.Servlets.servlet;
 import io.undertow.server.HttpHandler;
