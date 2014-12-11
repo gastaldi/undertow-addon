@@ -7,24 +7,22 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.jboss.forge.furnace.addons.AddonRegistry;
 import org.jboss.forge.furnace.container.cdi.events.Local;
 import org.jboss.forge.furnace.event.PostStartup;
 import org.jboss.forge.furnace.event.PreShutdown;
-import org.jboss.forge.furnace.services.Imported;
 
 @ApplicationScoped
 public class UndertowBootstrap {
 
 	@Inject
-	private Imported<UndertowEnricher> enrichers;
+	private AddonRegistry addonRegistry;
 
 	private Undertow undertow;
 
 	public void initializeUndertow(@Observes @Local PostStartup postStartup) {
 		Builder builder = Undertow.builder().addHttpListener(8080, "localhost");
-		for (UndertowEnricher undertowEnricher : enrichers) {
-			undertowEnricher.enrich(builder);
-		}
+		builder.setHandler(new ForgeHttpHandler(addonRegistry));
 		this.undertow = builder.build();
 		this.undertow.start();
 	}
