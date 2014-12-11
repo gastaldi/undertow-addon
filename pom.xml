@@ -91,6 +91,10 @@
 					<artifactId>resteasy-client</artifactId>
 					<groupId>org.jboss.resteasy</groupId>
 				</exclusion>
+				<exclusion>
+				   <artifactId>jaxrs-api</artifactId>
+				   <groupId>org.jboss.resteasy</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 	</dependencies>
