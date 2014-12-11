@@ -56,6 +56,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.forge.addon</groupId>
+			<artifactId>rest-client</artifactId>
+			<classifier>forge-addon</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.forge.addon</groupId>
 			<artifactId>resources</artifactId>
 			<classifier>forge-addon</classifier>
 			<scope>test</scope>
@@ -72,6 +77,17 @@
 				<exclusion>
 					<groupId>org.jboss.spec.javax.annotation</groupId>
 					<artifactId>jboss-annotations-api_1.2_spec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-undertow</artifactId>
+			<version>3.0.10.Final</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>resteasy-client</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>

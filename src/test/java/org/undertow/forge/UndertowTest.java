@@ -29,7 +29,7 @@ public class UndertowTest {
 		ForgeArchive archive = ShrinkWrap
 				.create(ForgeArchive.class)
 				.addBeansXML()
-				.addClass(HelloWorldHandler.class)
+				.addClasses(HelloWorldHandler.class, JAXRSEndpoint.class)
 				.addAsAddonDependencies(
 						AddonDependencyEntry
 								.create("org.jboss.forge.furnace.container:cdi"),
@@ -50,5 +50,14 @@ public class UndertowTest {
 		Assert.assertNotNull(resource);
 		Assert.assertTrue(resource.exists());
 		Assert.assertEquals("Hello World", resource.getContents());
+	}
+
+	@Test
+	public void testResteasySupport() throws Exception {
+		Resource<URL> resource = resourceFactory.create(new URL(
+				"http://localhost:8080/rest/testme"));
+		Assert.assertNotNull(resource);
+		Assert.assertTrue(resource.exists());
+		Assert.assertEquals("Hello JAXRS World", resource.getContents());
 	}
 }
